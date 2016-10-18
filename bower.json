@@ -1,0 +1,21 @@
+{
+  "name": "ecommerce-site",
+  "homepage": "https://github.com/Blankenship-Daniel/ecommerce-site",
+  "description": "",
+  "main": "src/index.php",
+  "authors": [
+    "Daniel Blankenship"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.7.0",
+    "jquery": "^3.1.1"
+  }
+}
