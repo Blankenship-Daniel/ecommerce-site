@@ -1,1 +1,22 @@
+#logo {
+    font-size: 2em;
+    color: #fff;
+    position: absolute;
+    top: 8px; left: 20px;
 
+    i {
+        margin-right: 15px;
+    }
+}
+
+nav {
+    position: relative;
+    padding: 1em;
+    height: 60px;
+    width: 100%;
+    background: material-color('green');
+}
+
+slide-show {
+    background: material-color('green', '200');
+}
