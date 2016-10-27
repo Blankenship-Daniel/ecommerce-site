@@ -1,0 +1,27 @@
+<dom-module id="api-get">
+    <script>
+        Polymer({
+            is: "api-get",
+            properties: {
+                path: String,
+                response: {
+                    Object,
+                    notify: true,
+                    reflectToAttribute: true
+                }
+            },
+            ready: function() {
+                var self = this;
+
+                if (firebase === undefined) {
+                    throw "firebase ref required";
+                }
+
+                var firebaseRef = firebase.database().ref(this.get('path'));
+                firebaseRef.once('value').then(function(snapshot) {
+                    self.set('response', snapshot.val());
+                });
+            }
+        });
+    </script>
+</dom-module>

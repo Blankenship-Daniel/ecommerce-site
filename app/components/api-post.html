@@ -1,0 +1,30 @@
+<dom-module id="api-post">
+    <script>
+        Polymer({
+            is: "api-post",
+            properties: {
+                path: String,
+                postData: {
+                    type: Object,
+                    observer: '__pushData'
+                },
+                response: {
+                    Object,
+                    notify: true,
+                    reflectToAttribute: true
+                }
+            },
+            ready: function() {
+                var self = this;
+
+                if (firebase === undefined) {
+                    throw "firebase ref required";
+                }
+            },
+            __pushData: function(newData, oldData) {
+                var firebaseRef = firebase.database().ref(this.get('path'));
+                firebaseRef.push().set(newData);
+            }
+        });
+    </script>
+</dom-module>

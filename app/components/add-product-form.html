@@ -1,0 +1,42 @@
+<dom-module id="add-product-form">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+
+        <div class="form-group">
+            <label for="product_name">Product Name: </label>
+            <input id="product_name" name="product_name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="product_desc">Product Description: </label>
+            <textarea id="product_desc" name="product_desc" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="product_image">Product Image URL: </label>
+            <input id="product_image" name="product_image" type="text" class="form-control">
+        </div>
+        <button on-tap="handleSubmit" class="btn btn-default">Submit</button>
+        <api-post path="products" post-data="{{ productData }}"></api-post>
+    </template>
+    <script>
+        Polymer({
+            is: "add-product-form",
+            properties: {
+                productData: {
+                    type: Object
+                }
+            },
+            handleSubmit: function() {
+                var data = {
+                    name:  this.$$('#product_name').value,
+                    desc:  this.$$('#product_desc').value,
+                    image: this.$$('#product_image').value
+                };
+                this.set('productData', data);
+            }
+        });
+    </script>
+</dom-module>

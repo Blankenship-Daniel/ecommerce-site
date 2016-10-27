@@ -1,0 +1,30 @@
+<dom-module id="api-storage">
+    <script>
+        Polymer({
+            is: "api-storage",
+            properties: {
+                path: {
+                    type: String,
+                    observer: '__getStorageData'
+                },
+                response: {
+                    Object,
+                    notify: true,
+                    reflectToAttribute: true
+                }
+            },
+            ready: function() {
+                if (firebase === undefined) {
+                    throw "firebase ref required";
+                }
+            },
+            __getStorageData: function(newData, oldData) {
+                var self = this;
+                var storageRef = firebase.storage().ref('product_images/' + newData);
+                storageRef.getDownloadURL().then(function(url) {
+                    self.set('response', url);
+                });
+            }
+        });
+    </script>
+</dom-module>

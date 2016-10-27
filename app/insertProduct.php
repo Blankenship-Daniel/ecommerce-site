@@ -5,8 +5,9 @@
         Retro Gaming
     </span>
 </nav>
-<slide-show></slide-show>
 <div class="container">
-    <h1>Ecommerce Site</h1>
+    <h1>Insert A New Product</h1>
+
+    <add-product-form></add-product-form>
 </div>
 <?php require_once('../layouts/footer.php') ?>

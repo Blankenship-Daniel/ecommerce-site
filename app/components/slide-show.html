@@ -1,3 +1,6 @@
+<link rel="import" href="api-get.html">
+<link rel="import" href="api-storage.html">
+
 <dom-module id="slide-show">
     <template>
         <style>
@@ -5,14 +8,58 @@
                 display: block;
                 min-height: 500px;
             }
-        </style>
 
+            :host img {
+                width: 100%;
+            }
+        </style>
+        <api-get path="products" response="{{ slideshowData }}"></api-get>
+        <div class="container">
+            <div class="row">
+                <template is="dom-repeat" items="{{ slides }}" as="slide">
+                    <h1>{{ slide.value.name }}</h1>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <p>{{ slide.value.desc }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{{ slide.value.image }}">
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
     </template>
     <script>
         Polymer({
             is: "slide-show",
             properties: {
-
+                slideshowData: {
+                    type: Object,
+                    observer: "__handleSlideshowData"
+                },
+                slides: {
+                    type: Array,
+                    value: []
+                }
+            },
+            __handleSlideshowData: function(newData, oldData) {
+                var self = this;
+                self.set('slides', self.__toArray(newData));
+            },
+            __toArray: function(obj) {
+                return Object.keys(obj).map(function(key) {
+                    return {
+                        name: key,
+                        value: obj[key]
+                    };
+                });
+            },
+            __handleImageURL: function(newData, oldData) {
+                this.imageURLArray.push(newData);
+            },
+            __count: function(newData, oldData) {
+                console.log(newData);
             }
         });
     </script>
