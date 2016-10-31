@@ -1,16 +1,51 @@
+<link rel="import" href="api-get.html">
+<link rel="import" href="api-storage.html">
 <link rel="import" href="ecommerce-product.html">
 
 <dom-module id="ecommerce-product-list">
     <template>
         <style>
-
+            :host {
+                display: block;
+            }
         </style>
+        <api-get path="products" response="{{ productData }}"></api-get>
+        <div class="container">
+            <div class="row">
+                <template is="dom-repeat" items="{{ products }}" as="product">
+                    <ecommerce-product
+                        name="{{ product.value.name }}"
+                        desc="{{ product.value.desc}}"
+                        image="{{ product.value.image }}">
+                    </ecommerce-product>
+                </template>
+            </div>
+        </div>
     </template>
     <script>
         Polymer({
             is: "ecommerce-product-list",
             properties: {
-
+                productData: {
+                    type: Object,
+                    observer: "__handleProductData"
+                },
+                products: {
+                    type: Array,
+                    value: []
+                }
+            },
+            __handleProductData: function(newData, oldData) {
+                var self = this;
+                self.set('products', self.__toArray(newData));
+            },
+            __toArray: function(obj) {
+                return Object.keys(obj).map(function(key) {
+                    return {
+                        name: key,
+                        value: obj[key]
+                    };
+                });
             }
         });
     </script>
