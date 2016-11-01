@@ -14,9 +14,33 @@ nav {
     padding: 1em;
     height: 60px;
     width: 100%;
-    background: material-color('green');
+    background: material-color('blue', '700');
 }
 
-slide-show {
-    background: material-color('green', '200');
+footer {
+    width: 100%;
+    min-height: 500px;
+    background: material-color('grey', '800');
+    color: material-color('grey', '100');
+}
+
+.primary-color {
+    color: #eee;
+    background: material-color('blue', '500');
+}
+
+.secondary-color {
+    background: material-color('blue', '300');
+}
+
+.submit-btn {
+    background: material-color('yellow', 'a100');
+}
+
+.action-btn {
+    background: material-color('yellow', 'a400');
+}
+
+.input-error {
+    border: 1px solid material-color('red', 'a400');
 }

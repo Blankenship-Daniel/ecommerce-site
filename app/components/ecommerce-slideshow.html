@@ -1,0 +1,65 @@
+<link rel="import" href="api-get.html">
+<link rel="import" href="ecommerce-product.html">
+<link rel="import" href="polymer-slide.html">
+<link rel="import" href="polymer-slideshow.html">
+
+<dom-module id="ecommerce-slideshow">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+        <polymer-slideshow height="500">
+            <polymer-slide>
+                <ecommerce-product
+                    name="Chrono Trigger"
+                    desc="The millennium. A portal is opened. The chain of time is broken. A young man is transported into the past, altering the course of history and the outcome of the future. He has to find his way home, but first he must travel to the outer edges of time to repair the world's chronology. On the way he encounters strange friends and foes, utilizes incredible devices and vehicles, and penetrates and neutralizes the fortresses of the past, present, and future. A paradox has been created. If he does not restore the order of time, nothing will ever be the same. He is the one who will become a hero. He is Crono."
+                    image="https://firebasestorage.googleapis.com/v0/b/ecommerce-api-83fda.appspot.com/o/product_images%2FChrono_Trigger_cover.jpg?alt=media&token=8dbdda73-ec36-438a-a841-ed26a4381245">
+                </ecommerce-product>
+            </polymer-slide>
+            <polymer-slide>
+                <ecommerce-product
+                    name="The Legend of Zelda, A Link to the Past"
+                    desc="Venture back to Hyrule and an age of magic and heroes. The predecessors of Link and Zelda face monsters on the march when a menacing magician takes over the kingdom. Only you can prevent his evil plot from shattering the land of Hyrule. In your quest, you’ll venture into twisting mazes, dungeons, palaces and shadowy forests. Test your mettle with mighty swords and magical weapons. Or heft a boulder and hurl it at your enemies. If the going gets tough, dive into a river--you can swing to escape! Learn powerful spells, locate magical artifacts and solve the mysteries of the evil magician and the hidden realm of Hyrule. This exciting Super NES sequel to the Legend of Zelda and The Adventure of Link uses 16-bit power to create a quest so colorful and detailed you don’t just play it, you live it!"
+                    image="https://firebasestorage.googleapis.com/v0/b/ecommerce-api-83fda.appspot.com/o/product_images%2FThe_Legend_of_Zelda_A_Link_to_the_Past_SNES_Game_Cover.jpg?alt=media&token=903c01b6-c658-450b-8941-516d9e91937f">
+                </ecommerce-product>
+            </polymer-slide>
+            <polymer-slide>
+                <ecommerce-product
+                    name="Super Mario World"
+                    desc="Mario’s off on his biggest adventure ever, and this time he’s brought along a friend. Yoshi the dinosaur teams up with Mario to battle Bowser, who has kidnapped Princess Toadstool once again. Guide Mario and Yoshi through nine peril-filled worlds to the final showdown in Bowser’s castle.  Use Mario’s new powers and Yoshi’s voracious monster-gobbling appetite as you explore 96 levels filled with dangerous new monsters and traps. Climb mountains and cross rivers, and descend into subterranean depths. Destroy the seven Koopa castles and find keys to gain entrance to hidden levels. Discover more warps and thrilling bonus worlds than ever before!  Mario’s back, and this time he’s better than ever!"
+                    image="https://firebasestorage.googleapis.com/v0/b/ecommerce-api-83fda.appspot.com/o/product_images%2FSuper_Mario_World_Box.png?alt=media&token=67f74021-be21-4b37-a267-dcdae08d1d67">
+                </ecommerce-product>
+            </polymer-slide>
+        </polymer-slideshow>
+    </template>
+    <script>
+        Polymer({
+            is: "ecommerce-slideshow",
+            properties: {
+                productData: {
+                    type: Object,
+                    observer: "__handleProductData"
+                },
+                products: {
+                    type: Array,
+                    value: []
+                }
+            },
+            __handleProductData: function(newData, oldData) {
+                var self = this;
+                console.log(newData);
+                self.set('products', self.__toArray(newData));
+            },
+            __toArray: function(obj) {
+                return Object.keys(obj).map(function(key) {
+                    return {
+                        name: key,
+                        value: obj[key]
+                    };
+                });
+            }
+        });
+    </script>
+</dom-module>

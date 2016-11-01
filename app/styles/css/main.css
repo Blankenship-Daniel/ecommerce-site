@@ -49,12 +49,23 @@
  *****************************************************************************/
 body {
   font-family: "Montserrat", sans-serif;
-  color: #616161;
-  background: #fafafa; }
+  color: #424242;
+  background: #fafafa;
+  font-size: 16px; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Lato", sans-serif;
   color: #212121; }
+
+/**
+ * Bootstrap overrides.
+ */
+.btn {
+  padding: 10px 20px;
+  font-size: 16px; }
+
+.jumbotron {
+  margin-bottom: 0; }
 
 /******************************************************************************
  * Layout
@@ -84,7 +95,26 @@ nav {
   padding: 1em;
   height: 60px;
   width: 100%;
-  background: #4caf50; }
+  background: #1976d2; }
 
-slide-show {
-  background: #a5d6a7; }
+footer {
+  width: 100%;
+  min-height: 500px;
+  background: #424242;
+  color: #f5f5f5; }
+
+.primary-color {
+  color: #eee;
+  background: #2196f3; }
+
+.secondary-color {
+  background: #64b5f6; }
+
+.submit-btn {
+  background: #ffff8d; }
+
+.action-btn {
+  background: #ffea00; }
+
+.input-error {
+  border: 1px solid #ff1744; }

@@ -5,9 +5,16 @@
         Retro Gaming
     </span>
 </nav>
-<slide-show></slide-show>
-<div class="container">
-    <h1>Ecommerce Site</h1>
-    <ecommerce-product-list></ecommerce-product-list>
+<div class="jumbotron primary-color">
+    <div class="container">
+        <ecommerce-slideshow></ecommerce-slideshow>
+    </div>
 </div>
+<div class="secondary-color">
+    <div class="container">
+        <customer-info-form></customer-info-form>
+        <customer-shipping-info-form></customer-shipping-info-form>
+    </div>
+</div>
+
 <?php require_once('../layouts/footer.php') ?>
