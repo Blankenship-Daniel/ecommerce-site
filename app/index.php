@@ -1,4 +1,4 @@
-<?php require_once('../layouts/header.php') ?>
+<?php require_once('header.php') ?>
 <nav>
     <span id="logo">
         <i class="fa fa-gamepad"></i>
@@ -12,9 +12,7 @@
 </div>
 <div class="secondary-color">
     <div class="container">
-        <customer-info-form></customer-info-form>
-        <customer-shipping-info-form></customer-shipping-info-form>
+        <ecommerce-product-list></ecommerce-product-list>
     </div>
 </div>
-
-<?php require_once('../layouts/footer.php') ?>
+<?php require_once('footer.php') ?>
