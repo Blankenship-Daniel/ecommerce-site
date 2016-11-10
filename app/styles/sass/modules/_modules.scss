@@ -1,36 +1,49 @@
-#logo {
-    font-size: 2em;
-    color: #fff;
-    position: absolute;
-    top: 8px; left: 20px;
-
-    i {
-        margin-right: 15px;
-    }
-}
-
 nav {
-    position: relative;
+    z-index: 2;
+    top: 0; left: 0;
+    position: fixed;
     padding: 1em;
     height: 60px;
     width: 100%;
-    background: material-color('blue', '700');
+    background: material-color('grey', '800');
+    -webkit-box-shadow: 4px 6px 18px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 6px 18px -9px rgba(0,0,0,0.75);
+    box-shadow: 4px 6px 18px -9px rgba(0,0,0,0.75);
+
+    #logo {
+        font-size: 2em;
+        color: #fff;
+        position: absolute;
+        top: 8px; left: 20px;
+
+        i {
+            margin-right: 15px;
+        }
+    }
+
+    shopping-cart-icon {
+        float: right;
+    }
+}
+
+.heading-panel {
+    margin-top: 60px;
 }
 
 footer {
     width: 100%;
     min-height: 500px;
     background: material-color('grey', '800');
-    color: material-color('grey', '100');
+    color: material-color('grey', '600');
+    font-weight: 100;
+}
+
+.text-white {
+    color: #ddd;
 }
 
 .primary-color {
-    color: #eee;
-    background: material-color('blue', '500');
-}
-
-.secondary-color {
-    background: material-color('blue', '300');
+    background: material-color('grey', '100');
 }
 
 .submit-btn {
@@ -43,4 +56,26 @@ footer {
 
 .input-error {
     border: 1px solid material-color('red', 'a400');
+}
+
+.content {
+    padding: 2em;
+}
+
+.lttp-img {
+    display: block;
+    position: relative;
+    height: 700px;
+}
+
+.lttp-img::after {
+    content: "";
+    background: url('/images/lttp_mastersword.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.3;
+    top: 0; right: 0; bottom: 0; left: 0;
+    position: absolute;
+    z-index: -1;
 }

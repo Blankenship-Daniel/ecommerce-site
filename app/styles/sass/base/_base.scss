@@ -1,13 +1,12 @@
 body {
     font-family: $site-body-font;
-    color: material-color('grey', '800');
-    background: material-color('grey', '50');
+    color: material-color('grey', '900');
+    background: #000;
     font-size: 16px;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: $site-heading-font;
-    color: material-color('grey', '900');
 }
 
 /**

@@ -10,17 +10,14 @@
             }
         </style>
         <api-get path="products" response="{{ productData }}"></api-get>
-        <div class="container">
-            <div class="row">
-                <template is="dom-repeat" items="{{ products }}" as="product">
-                    <ecommerce-product
-                        name="{{ product.value.name }}"
-                        desc="{{ product.value.desc}}"
-                        image="{{ product.value.image }}">
-                    </ecommerce-product>
-                </template>
-            </div>
-        </div>
+        <template is="dom-repeat" items="{{ products }}" as="product">
+            <ecommerce-product
+                id="{{ product.name }}"
+                name="{{ product.value.name }}"
+                desc="{{ product.value.desc}}"
+                image="{{ product.value.image }}">
+            </ecommerce-product>
+        </template>
     </template>
     <script>
         Polymer({

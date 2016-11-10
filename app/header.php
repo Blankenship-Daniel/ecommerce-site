@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>Ecommerce Site</title>
+        <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/css/main.css">
@@ -20,3 +20,10 @@
             storage-bucket="ecommerce-api-83fda.appspot.com"
             messaging-sender-id="839311280173">
         </firebase-app>
+        <nav>
+            <span id="logo">
+                <i class="fa fa-gamepad"></i>
+                Retro Gaming
+            </span>
+            <a href="shopping-cart.php"><shopping-cart-icon></shopping-cart-icon></a>
+        </nav>
