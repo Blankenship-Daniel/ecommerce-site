@@ -96,7 +96,16 @@
                     desc: self.desc,
                     image: self.image
                 };
-                localStorage.setItem(self.id, JSON.stringify(product));
+
+                var shopping_cart = [];
+                var shopping_cart_ref = localStorage.getItem('shopping-cart');
+
+                if (shopping_cart_ref !== null) {
+                    shopping_cart = JSON.parse(shopping_cart_ref);
+                }
+
+                shopping_cart.push(product);
+                localStorage.setItem('shopping-cart', JSON.stringify(shopping_cart));
             }
         });
     </script>
