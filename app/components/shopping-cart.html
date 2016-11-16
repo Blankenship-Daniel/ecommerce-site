@@ -18,15 +18,17 @@
                     <th>Description</th>
                     <th>Image</th>
                     <th>Price</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <template is="dom-repeat" items="{{ shoppingCartItems }}">
-                    <tr>
+                    <tr id$="{{ item.id }}" class="product">
                         <td class="product-name">{{ item.name }}</td>
                         <td>{{ item.desc }}</td>
                         <td><img width="100" src="{{ item.image }}"></td>
                         <td>$5.99</td>
+                        <td class="remove-icon"><i data-id$="{{ item.id }}" on-tap="__removeProduct" class="fa fa-trash"></i></td>
                     </tr>
                 </template>
             </tbody>
@@ -42,7 +44,6 @@
                 }
             },
             ready: function() {
-                var self = this;
                 var shopping_cart_items = [];
                 var shopping_cart_ref = localStorage.getItem('shopping-cart');
 
@@ -50,7 +51,23 @@
                     shopping_cart_items = JSON.parse(shopping_cart_ref);
                 }
 
-                self.set('shoppingCartItems', shopping_cart_items);
+                this.set('shoppingCartItems', shopping_cart_items);
+            },
+            __removeProduct: function(e) {
+                var product_id = e.target.getAttribute('data-id');
+                this.$$('#' + product_id).style.display = 'none';
+
+                var shopping_cart_ref = localStorage.getItem('shopping-cart');
+                var shopping_cart = JSON.parse(shopping_cart_ref);
+
+                for (var i = 0; i < shopping_cart.length; i++) {
+                    if (shopping_cart[i]['id'] === product_id) {
+                        shopping_cart.splice(i, 1);
+                        break;
+                    }
+                }
+
+                localStorage.setItem('shopping-cart', JSON.stringify(shopping_cart));
             }
         });
     </script>

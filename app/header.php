@@ -21,9 +21,11 @@
             messaging-sender-id="839311280173">
         </firebase-app>
         <nav>
-            <span id="logo">
-                <i class="fa fa-gamepad"></i>
-                Retro Gaming
-            </span>
+            <a href="/">
+                <span id="logo">
+                    <i class="fa fa-gamepad"></i>
+                    Retro Gaming
+                </span>
+            </a>
             <a href="shopping-cart.php"><shopping-cart-icon></shopping-cart-icon></a>
         </nav>

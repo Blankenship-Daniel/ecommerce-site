@@ -113,6 +113,11 @@ footer {
   color: #757575;
   font-weight: 100; }
 
+.remove-icon {
+  color: #f44336; }
+  .remove-icon .fa.fa-trash:hover {
+    cursor: pointer; }
+
 .text-white {
   color: #ddd; }
 
