@@ -2,10 +2,7 @@
 <div class="primary-color">
     <div class="container heading-panel">
         <div class="content">
-            <shopping-cart></shopping-cart>
-            <button type="button" class="btn btn-success">
-                <a href="checkout.php">Checkout</a>
-            </button>
+            <simple-auth></simple-auth>
         </div>
     </div>
 </div>

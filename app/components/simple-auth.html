@@ -1,0 +1,40 @@
+<link rel="import" href="/bower_components/polymerfire/firebase-auth.html">
+
+<dom-module id="simple-auth">
+    <template>
+        <firebase-auth
+            id="auth"
+            user="{{ user }}"
+            provider="google">
+        </firebase-auth>
+
+    </template>
+    <script>
+        Polymer({
+            is: "simple-auth",
+            properties: {
+                user: {
+                    type: Object,
+                    value: null,
+                    observer: '__handleSuccess'
+                }
+            },
+            ready: function() {
+                var self = this;
+                self.$.auth.signInWithPopup()
+                    .then(function(response) {
+                        // console.log(response);
+                    })
+                    .catch(function(error) {
+                        // console.log(error);
+                    });
+            },
+            __handleSuccess: function(newData, oldData) {
+                if (newData != null) {
+                    console.log('UID: ' + newData['uid']);
+                    console.log('Display Name: ' + newData['displayName']);
+                }
+            }
+        });
+    </script>
+</dom-module>
