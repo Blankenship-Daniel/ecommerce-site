@@ -1,10 +1,12 @@
-$<link rel="import" href="/bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="/bower_components/polymerfire/firebase-auth.html">
 
 <dom-module id="simple-auth">
     <template>
         <firebase-auth
             id="auth"
+            signed-in="{{ signedIn }}"
             user="{{ user }}"
+            status-known="{{ statusKnown }}"
             provider="google">
         </firebase-auth>
 
@@ -15,24 +17,31 @@ $<link rel="import" href="/bower_components/polymerfire/firebase-auth.html">
             properties: {
                 user: {
                     type: Object,
-                    value: null,
-                    observer: '__handleSuccess'
+                    value: null
+                },
+                statusKnown: {
+                    type: Boolean,
+                    value: false,
+                    observer: '__handleLogin'
+                },
+                signedIn: {
+                    type: Boolean,
+                    value: false
                 }
             },
-            ready: function() {
+            __handleLogin: function(newData, oldData) {
                 var self = this;
-                self.$.auth.signInWithPopup()
-                    .then(function(response) {
-                        // console.log(response);
-                    })
-                    .catch(function(error) {
-                        // console.log(error);
-                    });
-            },
-            __handleSuccess: function(newData, oldData) {
-                if (newData != null) {
-                    console.log('UID: ' + newData['uid']);
-                    console.log('Display Name: ' + newData['displayName']);
+                if (newData) {
+                    if (self.signedIn) {
+                        var user = {
+                            uid: self.user['uid'],
+                            name: self.user['displayName']
+                        }
+
+                        localStorage.setItem('authed_user', JSON.stringify(user));
+                    } else {
+                        self.$.auth.signInWithRedirect();
+                    }
                 }
             }
         });

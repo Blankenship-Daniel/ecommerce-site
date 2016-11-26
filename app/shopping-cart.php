@@ -3,7 +3,7 @@
     <div class="container heading-panel">
         <div class="content">
             <shopping-cart></shopping-cart>
-            <button type="button" class="btn btn-success">
+            <button type="button" class="btn btn-default submit-btn">
                 <a href="checkout.php">Checkout</a>
             </button>
         </div>

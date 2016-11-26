@@ -65,6 +65,11 @@
 
                 self.__validate_form(validation_rules, 'input-error');
             },
+            __is_valid_form: function(elems, err_cls) {
+                var self = this;
+                console.log(self.$);
+                return false;
+            },
             __validate_form: function(elems, err_cls) {
                 var self = this;
                 for (var i = 0; i < elems.length; i++) {

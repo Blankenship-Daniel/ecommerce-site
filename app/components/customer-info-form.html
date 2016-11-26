@@ -7,7 +7,7 @@
                 min-height: 300px;
             }
         </style>
-
+        <h1>Customer Info</h1>
         <div class="form-group">
             <label for="first_name">*First Name: </label>
             <input id="first_name" name="first_name" type="text" maxlength="50" class="form-control">
@@ -32,6 +32,19 @@
             properties: {
 
             },
+             __is_valid_form: function(err_cls) {
+                var self = this;
+                var obj = self.$;
+
+                for (var prop in obj) {
+                    var elem = obj[prop];
+                    if (elem.classList.contains(err_cls)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            },
             __submit_form: function() {
                 var self = this;
                 var first_name = this.$$('#first_name');
@@ -55,6 +68,23 @@
                 ];
 
                 self.__validate_form(validation_rules, 'input-error');
+
+                if (self.__is_valid_form('input-error')) {
+                    var user = {
+                        first_name: first_name.value,
+                        middle_initial: middle_initial.value,
+                        last_name: last_name.value,
+                        email: email.value
+                    };
+
+                    self.__submit_user_data(user);
+                }
+            },
+            __submit_user_data: function(user_data) {
+                var authed_user = localStorage.getItem('authed_user');
+                var authed_user_obj = JSON.parse(authed_user);
+                var firebaseRef = firebase.database().ref('users/' + authed_user_obj['uid'] + '/contact_info');
+                firebaseRef.set(user_data);
             },
             __validate_form: function(elems, err_cls) {
                 var self = this;
