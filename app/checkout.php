@@ -3,7 +3,7 @@
     <div class="container heading-panel">
         <div class="content">
             <simple-auth></simple-auth>
-            <customer-info-form></customer-info-form>
+            <checkout-process></checkout-process>
         </div>
     </div>
 </div>

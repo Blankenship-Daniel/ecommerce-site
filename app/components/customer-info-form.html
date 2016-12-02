@@ -30,9 +30,14 @@
         Polymer({
             is: "customer-info-form",
             properties: {
-
+                isSubmitted: {
+                    type: Boolean,
+                    value: false,
+                    reflectToAttribute: true,
+                    notify: true
+                }
             },
-             __is_valid_form: function(err_cls) {
+            __is_valid_form: function(err_cls) {
                 var self = this;
                 var obj = self.$;
 
@@ -78,6 +83,7 @@
                     };
 
                     self.__submit_user_data(user);
+                    self.set('isSubmitted', true);
                 }
             },
             __submit_user_data: function(user_data) {

@@ -7,7 +7,7 @@
                 min-height: 300px;
             }
         </style>
-
+        <h1>Customer Shipping Info</h1>
         <div class="form-group">
             <label for="street_address_1">*Street Address 1: </label>
             <input id="street_address_1" name="street_address_1" type="text" maxlength="100" class="form-control">
@@ -34,7 +34,10 @@
         Polymer({
             is: "customer-shipping-info-form",
             properties: {
-
+                isSubmitted: {
+                    type: Boolean,
+                    reflectToAttribute: true
+                }
             },
             __submit_form: function() {
                 var self = this;
