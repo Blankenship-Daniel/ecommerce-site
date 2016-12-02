@@ -36,16 +36,31 @@
             properties: {
                 isSubmitted: {
                     type: Boolean,
-                    reflectToAttribute: true
+                    value: false,
+                    reflectToAttribute: true,
+                    notify: true
                 }
+            },
+            __is_valid_form: function(err_cls) {
+                var self = this;
+                var obj = self.$;
+
+                for (var prop in obj) {
+                    var elem = obj[prop];
+                    if (elem.classList.contains(err_cls)) {
+                        return false;
+                    }
+                }
+
+                return true;
             },
             __submit_form: function() {
                 var self = this;
-                var street_address_1 = this.$$('#street_address_1');
-                var street_address_2 = this.$$('#street_address_2');
-                var city = this.$$('#city');
-                var state = this.$$('#state');
-                var zip = this.$$('#zip');
+                var street_address_1 = self.$$('#street_address_1');
+                var street_address_2 = self.$$('#street_address_2');
+                var city = self.$$('#city');
+                var state = self.$$('#state');
+                var zip = self.$$('#zip');
 
                 var validation_rules = [
                     {
@@ -67,14 +82,29 @@
                 ];
 
                 self.__validate_form(validation_rules, 'input-error');
+
+                if (self.__is_valid_form('input-error')) {
+                    var user_shipping_info = {
+                        street_address_1: street_address_1.value,
+                        street_address_2: street_address_2.value,
+                        city: city.value,
+                        state: state.value,
+                        zip: zip.value
+                    };
+
+                    self.__submit_user_data(user_shipping_info);
+                    self.set('isSubmitted', true);
+                }
             },
-            __is_valid_form: function(elems, err_cls) {
-                var self = this;
-                console.log(self.$);
-                return false;
+            __submit_user_data: function(user_data) {
+                var authed_user = localStorage.getItem('authed_user');
+                var authed_user_obj = JSON.parse(authed_user);
+                var firebaseRef = firebase.database().ref('users/' + authed_user_obj['uid'] + '/shipping_info');
+                firebaseRef.set(user_data);
             },
             __validate_form: function(elems, err_cls) {
                 var self = this;
+
                 for (var i = 0; i < elems.length; i++) {
                     var el = elems[i].elem;
                     var rx = elems[i].regex;

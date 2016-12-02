@@ -1,16 +1,127 @@
 <dom-module id="customer-payment-info-form">
     <template>
         <style>
-
+            :host {
+                display: block;
+                padding: 2em;
+                min-height: 300px;
+            }
         </style>
-
-        
+        <h1>Customer Payment Info</h1>
+        <div class="form-group">
+            <label for="name_on_card">*Name On Card: </label>
+            <input id="name_on_card" name="name_on_card" type="text" maxlength="200" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="card_number">Card Number: </label>
+            <input id="card_number" name="card_number" type="password" maxlength="100" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="exp_date">*Expiration Date: </label>
+            <input id="exp_date" name="exp_date" type="text" maxlength="5" placeholder="01/19" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="cvv">*CVV2: </label>
+            <input id="cvv" name="cvv" type="text" maxlength="4" class="form-control">
+        </div>
+        <button on-tap="__submit_form" class="btn btn-default submit-btn">Submit</button>
     </template>
     <script>
         Polymer({
             is: "customer-payment-info-form",
             properties: {
+                isSubmitted: {
+                    type: Boolean,
+                    value: false,
+                    reflectToAttribute: true,
+                    notify: true
+                }
+            },
+            __is_valid_form: function(err_cls) {
+                var self = this;
+                var obj = self.$;
 
+                for (var prop in obj) {
+                    var elem = obj[prop];
+                    if (elem.classList.contains(err_cls)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            },
+            __submit_form: function() {
+                var self = this;
+                var name_on_card = this.$$('#name_on_card');
+                var card_number = this.$$('#card_number');
+                var exp_date = this.$$('#exp_date');
+                var cvv = this.$$('#cvv');
+
+                var validation_rules = [
+                    {
+                        elem: name_on_card,
+                        regex: /^[a-zA-Z ,.'-]+$/
+                    },
+                    {
+                        elem: card_number,
+                        regex: /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/
+                    },
+                    {
+                        elem: exp_date,
+                        regex: /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/
+                    },
+                    {
+                        elem: cvv,
+                        regex: /^\d{4}$/
+                    }
+                ];
+
+                self.__validate_form(validation_rules, 'input-error');
+
+                if (self.__is_valid_form('input-error')) {
+                    var user_payment_info = {
+                        name_on_card: name_on_card.value,
+                        card_number: card_number.value,
+                        exp_date: exp_date.value,
+                        cvv: cvv.value
+                    };
+
+                    self.__submit_user_data(user_payment_info);
+                    self.set('isSubmitted', true);
+                }
+            },
+            __submit_user_data: function(user_data) {
+                var authed_user = localStorage.getItem('authed_user');
+                var authed_user_obj = JSON.parse(authed_user);
+                var firebaseRef = firebase.database().ref('users/' + authed_user_obj['uid'] + '/payment_info');
+                firebaseRef.set(user_data);
+            },
+            __validate_form: function(elems, err_cls) {
+                var self = this;
+                for (var i = 0; i < elems.length; i++) {
+                    var el = elems[i].elem;
+                    var rx = elems[i].regex;
+
+                    if (self.__validate_el(el, rx)) {
+                        self.__remove_class(el, err_cls);
+                    } else {
+                        self.__add_class(el, err_cls);
+                    }
+                }
+            },
+            __validate_el: function(el, regex) {
+                var val = el.value;
+                return val.match(regex) !== null;
+            },
+            __add_class: function(el, cls) {
+                if (!el.classList.contains(cls)) {
+                    el.classList.add(cls);
+                }
+            },
+            __remove_class: function(el, cls) {
+                if (el.classList.contains(cls)) {
+                    el.classList.remove(cls);
+                }
             }
         });
     </script>

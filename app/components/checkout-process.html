@@ -1,5 +1,6 @@
 <link rel="import" href="customer-info-form.html">
 <link rel="import" href="customer-shipping-info-form.html">
+<link rel="import" href="customer-payment-info-form.html">
 
 <dom-module id="checkout-process">
     <template>
@@ -8,8 +9,15 @@
                 display: block;
             }
 
-            #customer-shipping-info-form {
+            #customer-shipping-info-form,
+            #customer-payment-info-form,
+            #thankyou-page {
                 display: none;
+            }
+
+            #thankyou-page {
+                padding: 2em;
+                min-height: 300px;
             }
         </style>
         <customer-info-form
@@ -18,6 +26,13 @@
         <customer-shipping-info-form
             id="customer-shipping-info-form"
             is-submitted="{{ form2ready }}"></customer-shipping-info-form>
+        <customer-payment-info-form
+            id="customer-payment-info-form"
+            is-submitted="{{ form3ready }}"></customer-payment-info-form>
+        <div id="thankyou-page">
+            <h1>Thank you!</h1>
+            <p>Your information has been submitted sucessfully.</p>
+        </div>
     </template>
     <script>
         Polymer({
@@ -32,6 +47,11 @@
                     type: Boolean,
                     value: false,
                     observer: '__showForm3'
+                },
+                form3ready: {
+                    type: Boolean,
+                    value: false,
+                    observer: '__showThankYou'
                 }
             },
             __showForm2: function(newVal, oldVal) {
@@ -46,7 +66,26 @@
                 }
             },
             __showForm3: function(newVal, oldVal) {
+                var self = this;
 
+                if (newVal) {
+                    var customer_shipping_info_form = self.$$('#customer-shipping-info-form');
+                    var customer_payment_info_form = self.$$('#customer-payment-info-form');
+
+                    customer_shipping_info_form.style.display = 'none';
+                    customer_payment_info_form.style.display = 'block';
+                }
+            },
+            __showThankYou: function(newVal, oldVal) {
+                var self = this;
+
+                if (newVal) {
+                    var customer_payment_info_form = self.$$('#customer-payment-info-form');
+                    var thankyou_page = self.$$('#thankyou-page');
+
+                    customer_payment_info_form.style.display = 'none';
+                    thankyou_page.style.display = 'block';
+                }
             }
         });
     </script>
