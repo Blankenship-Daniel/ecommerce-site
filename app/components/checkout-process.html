@@ -1,0 +1,53 @@
+<link rel="import" href="customer-info-form.html">
+<link rel="import" href="customer-shipping-info-form.html">
+
+<dom-module id="checkout-process">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            #customer-shipping-info-form {
+                display: none;
+            }
+        </style>
+        <customer-info-form
+            id="customer-info-form"
+            is-submitted="{{ form1ready }}"></customer-info-form>
+        <customer-shipping-info-form
+            id="customer-shipping-info-form"
+            is-submitted="{{ form2ready }}"></customer-shipping-info-form>
+    </template>
+    <script>
+        Polymer({
+            is: "checkout-process",
+            properties: {
+                form1ready: {
+                    type: Boolean,
+                    value: false,
+                    observer: '__showForm2'
+                },
+                form2ready: {
+                    type: Boolean,
+                    value: false,
+                    observer: '__showForm3'
+                }
+            },
+            __showForm2: function(newVal, oldVal) {
+                var self = this;
+
+                if (newVal) {
+                    var customer_info_form = self.$$('#customer-info-form');
+                    var customer_shipping_info_form = self.$$('#customer-shipping-info-form');
+
+                    customer_info_form.style.display = 'none';
+                    customer_shipping_info_form.style.display = 'block';
+                }
+            },
+            __showForm3: function(newVal, oldVal) {
+
+            }
+        });
+    </script>
+</dom-module>
