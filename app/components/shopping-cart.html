@@ -29,7 +29,7 @@
                         <td>x{{ item.qty }}</td>
                         <td>{{ item.desc }}</td>
                         <td><img width="100" src="{{ item.image }}"></td>
-                        <td>$5.99</td>
+                        <td>${{ item.price }}</td>
                         <td class="remove-icon"><i data-id$="{{ item.id }}" on-tap="__removeProduct" class="fa fa-trash"></i></td>
                     </tr>
                 </template>
